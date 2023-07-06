@@ -1,3 +1,107 @@
+RLE-сжатие – один из самых простых методов сжатия строки, основанный на сокращении подстрок, состоящих из одинаковых символов. Сжатие осуществляется следующим образом:
+Строка разбивается на минимальное количество подстрок, состоящих из одинаковых символов. Например, abbcaaa превращается в строки a, bb, c, aaa.
+
+def coding(data):
+    encoding = ''
+    prev_letter = ''
+    count = 1
+    if not data: return ''
+    for letter in data:
+        if letter != prev_letter:
+            if prev_letter:
+                encoding += str(count) + prev_letter
+            count = 1
+            prev_letter = letter
+        else:
+            count += 1
+    else:
+        encoding += str(count) + prev_letter
+        return encoding
+text = coding('AAAFFFFDDCCCAAAAWWWWWEEEEQQQQLLLL')
+
+print('AAAFFFFDDCCCAAAAWWWWWEEEEQQQQLLLL')
+print(text)
+
+
+2.Создайте список из случайных чисел. Найдите номер его последнего локального максимума (локальный максимум — это элемент, 
+который больше любого из своих соседей).
+import random
+num = int(input('Введите количество элементов: '))
+array = []
+inde = 0
+ind_max = 0
+big = 0
+
+for i in range(num):
+    array.append(random.randint(1, 10))
+print(array)
+for i in range(1,num-1):
+    if array[i - 1] < array[i] > array[i + 1]:
+        inde = i
+        if ind_max < inde:
+            ind_max = inde
+            big = array[ind_max]
+    
+print(f'Элемент {big} на позиции {ind_max + 1}') 
+
+
+3.Создайте список из случайных чисел. Найдите максимальное количество его одинаковых элементов.
+
+import random
+array = []
+count = int(input('Кол-во элементов: '))
+for _ in range(count):
+    number = random.randint(1, 9)
+    array.append(number)
+print(array)
+
+def countation(listt):
+    max_repeat = 0
+    listt_max = listt[0] 
+    for i in range(len(listt)):
+        repeat = 0
+        for j in range(len(listt)):            
+            if listt[j] == listt[i]:
+                repeat = repeat + 1
+        if repeat > max_repeat:
+            max_repeat = repeat
+            listt_max = listt[i]
+            
+    print(f"Цифра {listt_max} встретилась {max_repeat} раз ")
+print(countation(array))
+
+
+---------------------------------------------------------      ----------------------------------      ---------------------------------------
+---------------------------------------------------------      ----------------------------------      ---------------------------------------
+
+4.Создайте список из случайных чисел. Найдите второй максимум.
+a = [1, 2, 3] # Первый максимум == 3, второй == 2
+
+import random
+array = []
+count = int(input('Кол-во элементов: '))
+for _ in range(count):
+    number = random.randint(1, 1000)
+    array.append(number)
+print(array)
+
+def max1_max2 (list):
+    max1 = list[0]
+    max2 = list[0]
+    for i in range(len(list)):
+        if list[i] > max1:
+            max2 = max1
+            max1 = list[i]
+        elif list[i] > max2:
+            max2 = list[i]
+    print(f"Второй мах {max2}")
+
+print(max1_max2(array))
+
+
+
+
+
 # Задача 16: Требуется вычислить, сколько раз встречается некоторое число X в массиве A[1..N]. 
 # Пользователь в первой строке вводит натуральное число N – количество элементов в массиве. 
 # В последующих  строках записаны N целых чисел Ai. Последняя строка содержит число X
